@@ -4,6 +4,7 @@ namespace Fico7489\Laravel\Pivot\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection as BaseCollection;
 
 trait FiresPivotEventsTrait
 {
@@ -93,6 +94,10 @@ trait FiresPivotEventsTrait
         } elseif ($id instanceof Collection) {
             foreach ($id as $model) {
                 $ids[$model->getKey()] = $attributes;
+            }
+        } elseif ($id instanceof BaseCollection) {
+            foreach ($id as $model) {
+                $ids[$model] = $attributes;
             }
         } elseif (is_array($id)) {
             foreach ($id as $key => $attributesArray) {
